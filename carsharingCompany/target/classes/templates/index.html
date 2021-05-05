@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css"/>
 </head>
 <body>
+<div class="header">
+<!--    <form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">-->
+<!--        <input type="submit" value="logout">-->
+<!--    </form>-->
 
-<p th:text = "${user}"></p>
-<form th:if="${user != 'anonymous'}" th:action="@{/logout}">
-    <input type="submit" value="logout">
-</form>
-
-<h2>Index Page</h2>
-
-<a th:href="@{/login}">login page</a><br>
-<a th:href="@{/registration}">registration</a><br>
-<a th:href="@{/foruser}">for user</a><br>
-<a th:href="@{/foradmin}">for admin</a><br>
+    <a th:href="@{/login}">LOGIN</a>
+    <a th:href="@{/registration}">REGISTRATION</a>
+    <a th:href="@{/foruser}">FORUSER</a>
+    <a th:href="@{/foradmin}">FORADMIN</a>
+    <a th:if="${user != 'anonymous'}" th:text="${user}"></a>
+</div>
 </body>
 </html>
