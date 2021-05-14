@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/registration.css}" type="text/css"/>
 </head>
 <body>
-<h2>Registration Page</h2>
-<form th:action="@{/registration}" method="post">
-    username:<input type="text" name="username">
-    password:<input type="text" name="password">
-    email:<input type="text" name="email">
-    phone:<input type="text" name="phone">
-    <input type="submit" value="registration">
-</form>
+<div id="wrapper">
+    <div id="reg">
+        <h1>Registration Form</h1>
+        <form th:action="@{/registration}" method="post" id="registration" autocomplete="off">
+            <input type="text" name="username" id="username" placeholder="username">
+            <input type="text" name="password" id="password" placeholder="password">
+            <input type="text" name="email" id="email" placeholder="email">
+            <input type="text" name="phone" id="phone" placeholder="phone">
+            <button type="submit">&#xf0da;</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

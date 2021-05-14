@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<p>Nissan1<a th:href="@{/reserved?id=1}">Арендовать</a></p>-->
+<!--<p>Nissan2<a th:href="@{/reserved?id=2}">Арендовать</a></p>-->
+<!--<p>Mercedes1<a th:href="@{/reserved?id=3}">Арендовать</a></p>-->
+<table>
+    <thead>
+    <tr>
+        <th> Mark </th>
+        <th> Number </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${cars.empty}">
+        <td colspan="2"> No Cars Available </td>
+    </tr>
+    <tr th:each="car : ${cars}">
+        <td><span th:text="${car.getMark()}"> Mark </span></td>
+        <td><span th:text="${car.getNumber()}"> Number </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

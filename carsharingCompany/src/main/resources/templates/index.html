@@ -4,18 +4,62 @@
     <meta charset="UTF-8">
     <title>Index</title>
     <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/index.css}" type="text/css"/>
 </head>
 <body>
-<div class="header">
 <!--    <form th:if="${user != 'anonymous'}" th:action="@{/logout}" method="post">-->
 <!--        <input type="submit" value="logout">-->
 <!--    </form>-->
 
-    <a th:href="@{/login}">LOGIN</a>
-    <a th:href="@{/registration}">REGISTRATION</a>
-    <a th:href="@{/foruser}">FORUSER</a>
-    <a th:href="@{/foradmin}">FORADMIN</a>
-    <a th:if="${user != 'anonymous'}" th:text="${user}"></a>
+<!--    <a th:href="@{/login}">LOGIN</a>-->
+<!--    <a th:href="@{/registration}">REGISTRATION</a>-->
+<!--    <a th:href="@{/foruser}">FORUSER</a>-->
+<!--    <a th:href="@{/foradmin}">FORADMIN</a>-->
+<!--    <a th:if="${user != 'anonymous'}" th:text="${user}"></a>-->
+
+
+<div class="wrapper">
+    <div class="first">
+        <img th:src="@{/images/main3.jpg}">
+        <p>CYBER DRIVE</p>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="header_body">
+                <a th:href="@{/}" class="header_logo">
+
+                </a>
+                <div class="header_burger">
+                    <span></span>
+                </div>
+                <nav class="header_menu">
+                    <ul class="header_list">
+                        <li>
+                            <a th:href="@{/about}" class="header_link">ABOUT&nbsp;US</a>
+                        </li>
+                        <li>
+                            <a href="" class="header_link">TARIFFS</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/registration}" class="header_link">REGISTRATION</a>
+                        </li>
+                        <li>
+                            <a th:if="${user == 'anonymous'}" th:href="@{/login}" class="header_link">SIGN&nbsp;IN</a>
+                            <a th:if="${user != 'anonymous'}" th:text="${user}" class="header_link"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="tariffs">
+        e[rbmrbermbebomembe[rmb[ermb[ermbmerb
+        eropbme[pbme[mb[embmrebmer[bme[bm[erbm
+        e[mb[ermb[emb[mer[bmer[bmerbebme[bme[bm
+        e[mb[ermb[ermb[ermb[ermb[erm[bemr[bemrbm
+        ebemb[em[bme[mbre[mbe[mbembe[b[ebemmeb
+        e[pmb[embermb[remb[ermb[rebm[ermb[erm
+    </div>
 </div>
 </body>
 </html>

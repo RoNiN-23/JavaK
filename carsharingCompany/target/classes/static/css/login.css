@@ -1,0 +1,120 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css');
+
+*{
+    font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
+}
+body{
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+}
+h1{
+    font-family: "Arial Black";
+    color: white;
+    width: 400px;
+    font-size: 45px;
+    margin-left: 10px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 5px;
+}
+#wrapper{
+    max-height: 100%;
+    display: inline-block;
+    position: fixed;
+}
+
+img{
+    position: relative;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+.form{
+    width: 385px;
+    height: 40%;
+    position: absolute;
+    margin-left: 40%;
+    top: 30%;
+}
+
+/* === Sign in Form === */
+#signin {
+    position: relative;
+}
+#signin::before {
+    display: block;
+    position: relative;
+    height: 2px;
+    background: white;
+    content: '';
+    top: 80px;
+    margin-left: 20px;
+    z-index: 1;
+}
+#username{
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+#password{
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+#signin  input[type="text"], #signin  input[type="password"], #signin button[type="submit"]{
+    background: rgb(49, 18, 71);
+    box-shadow: inset -100px -100px 0 rgb(59, 21, 86);
+    color: rgb(255, 255, 255);
+}
+#signin  input[type="text"], #signin  input[type="password"]{
+    position: relative;
+    display: block;
+    width: 400px;
+    height: 80px;
+    border: 0;
+    outline: 0;
+    padding: 0 0 0 20px;
+    font-weight: 700;
+}
+#signin  input[type="text"]:focus, #signin  input[type="password"]:focus{
+    color: rgb(255, 255, 255);
+}
+#signin button[type="submit"]{
+    display: block;
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    color: rgb(226, 220, 220);
+    border-radius: 50px;
+    outline: 0;
+    z-index: 2;
+    top: 50px;
+    right: -65px;
+    border: 6px solid white;
+    font-size: 25px;
+    text-indent: 0px;
+    padding-left: 9px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+#signin button[type="submit"]:hover{
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 13px rgb(255, 255, 255);
+    cursor: pointer;
+}
+#signin p {
+    color: #b3b3b3;
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+}
+#signin p > a{
+    color: white;
+    text-decoration: none;
+}
+#signin p > a:hover{
+    border-bottom: 1px solid;
+}
+input::-webkit-input-placeholder { color: #8840a5; }
+input::-moz-placeholder { color: #8840a5; }

@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
 </head>
 <body>
-<h2>Login Page</h2>
-<form th:action="@{/login}" method="post">
-    username:<input type="text" name="username">
-    password:<input type="text" name="password">
-    <input type="submit" value="login">
-</form>
+<div id="wrapper">
+    <img th:src="@{/images/main3.jpg}" alt="">
+    <div class="form">
+        <h1>Sign In Form</h1>
+        <form id="signin" th:action="@{/login}" method="post" autocomplete="off">
+            <input type="text" name="username" id="username" placeholder="username">
+            <input type="text" name="password" id="password" placeholder="password">
+            <button type="submit">&#xf0da;</button>
+            <p>forgot your password? <a href="#">click here</a></p>
+        </form>
+    </div>
+</div>
 </body>
 </html>
