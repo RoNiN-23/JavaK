@@ -7,6 +7,6 @@
 <body>
 <h1 th:text="${mark}"></h1>
 <h1 th:text="${number}"></h1>
-<h1 >Зарезервировано</h1>
+<a th:href="@{'/reserved?id=' + ${id}">Зарезервировать</a>
 </body>
 </html>

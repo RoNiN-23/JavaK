@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: 'LoveloLineBold';
     src: url(../fonts/10483.ttf);
@@ -6,22 +5,25 @@
     font-weight: normal;
 }
 
-body{
-background-color: #353535;
+body {
+    background-color: #353535;
+    position: fixed;
 }
 
-.first{
-    position: relative;
+.first {
     display: inline-block;
 }
 
-.first img{
+.first img {
+    position: relative;
+    top: 0;
+    left: 0;
     object-fit: cover;
-    max-height: 100%;
-    max-width: 100%;
+    height: 100vh;
+    width: 100%;
 }
 
-.first p{
+.first p {
     position: absolute;
     top: 35%;
     right: 25%;

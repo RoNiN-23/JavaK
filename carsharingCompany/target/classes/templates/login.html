@@ -6,17 +6,16 @@
     <link media="all" rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
 </head>
 <body>
-<div id="wrapper">
-    <img th:src="@{/images/main3.jpg}" alt="">
-    <div class="form">
-        <h1>Sign In Form</h1>
-        <form id="signin" th:action="@{/login}" method="post" autocomplete="off">
-            <input type="text" name="username" id="username" placeholder="username">
-            <input type="text" name="password" id="password" placeholder="password">
-            <button type="submit">&#xf0da;</button>
-            <p>forgot your password? <a href="#">click here</a></p>
-        </form>
-    </div>
+
+<img th:src="@{/images/main3.jpg}" alt="">
+<div class="login-page">
+    <p class="signin">SIGN IN FORM</p>
+    <form class="login-form" th:action="@{/login}" method="post" autocomplete="off">
+        <input type="text" placeholder="username" name="username" required/>
+        <input type="password" placeholder="password" name="password" required/>
+        <button type="submit">login</button>
+    </form>
+    <p class="message">Not registered? <a th:href="@{/registration}">Create an account</a></p>
 </div>
 </body>
 </html>
