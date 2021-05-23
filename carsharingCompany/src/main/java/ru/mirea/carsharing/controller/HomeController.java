@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mirea.carsharing.domain.Car;
+import ru.mirea.carsharing.domain.Order;
+import ru.mirea.carsharing.domain.OrderForm;
 import ru.mirea.carsharing.domain.User;
 import ru.mirea.carsharing.repo.CarRepo;
+import ru.mirea.carsharing.repo.OrderRepo;
+import ru.mirea.carsharing.repo.UserRepo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.Date;
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/")
@@ -23,25 +26,25 @@ public class HomeController {
     @Autowired
     CarRepo carRepo;
 
+    @Autowired
+    OrderRepo orderRepo;
+
+    @Autowired
+    UserRepo userRepo;
+
     @GetMapping
     public String index(@AuthenticationPrincipal User user, Model model) {
         if (user != null) {
             model.addAttribute("user", user.getUsername());
             return "index";
         }
-            model.addAttribute("user", "anonymous");
-            return "index";
+        model.addAttribute("user", "anonymous");
+        return "index";
     }
 
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
-    @GetMapping("/about")
-    public String forUser() {
-        return "about";
     }
 
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
@@ -52,18 +55,60 @@ public class HomeController {
 
     @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping("/reserve")
-    public String reserve(Map<String, Object> model){
-        model.put("cars",carRepo.findAllByReserved(false));
+    public String reserve(Model model) {
+        Iterable<Car> cars = carRepo.findAllByReserved(false);
+        model.addAttribute("cars", cars);
         return "reserve";
     }
 
+
     @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
-    @GetMapping("/car")
-    public String reserved(@RequestParam Long id, Model model){
-        model.addAttribute("mark",carRepo.findCarsById(id).getMark());
-        model.addAttribute("number",carRepo.findCarsById(id).getNumber());
-        carRepo.findCarsById(id).setReserved(true);
-        carRepo.save(carRepo.findCarsById(id));
-        return "car";
+    @GetMapping("/reserved")
+    public String reserved(@RequestParam Long id, @AuthenticationPrincipal User user, OrderForm form) {
+        Car car = carRepo.findCarById(id);
+        car.setReserved(true);
+        user.setCarId(car.getId());
+        Order order = form.toOrder(user, car);
+        carRepo.save(car);
+        orderRepo.save(order);
+        user.setOrderId(order.getId());
+        userRepo.save(user);
+        return "reserved";
     }
+
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/user")
+    public String user(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        Iterable<Order> orders = orderRepo.findAllByUserId(user.getId());
+        model.addAttribute("orders", orders);
+        model.addAttribute("car", carRepo.findCarById(user.getCarId()));
+
+        return "user";
+    }
+
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
+    @GetMapping("/unreserve")
+    public String unreserve(@AuthenticationPrincipal User user, Model model) {
+
+        Date date = new Date();
+
+        Order order = orderRepo.findOrderById(user.getOrderId());
+        order.setEndDataAndTime(date.toString());
+        Car car = carRepo.findCarById(user.getCarId());
+        order.setPrice(order.calculPrice(order.getStartDataAndTime(), order.getEndDataAndTime(), car.getCarPrice()));
+        orderRepo.save(order);
+
+
+        car.setReserved(false);
+        carRepo.save(car);
+
+        user.setCarId(null);
+        user.setOrderId(null);
+        userRepo.save(user);
+
+
+        return "redirect:/user";
+    }
+
 }

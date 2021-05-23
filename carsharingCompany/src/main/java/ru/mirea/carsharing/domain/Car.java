@@ -15,4 +15,5 @@ public class Car {
     private String mark;
     private String number;
     private boolean reserved;
+    private int carPrice;
 }

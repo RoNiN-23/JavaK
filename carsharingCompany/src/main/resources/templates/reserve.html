@@ -5,17 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<!--<p>Nissan1<a th:href="@{/reserved?id=1}">Арендовать</a></p>-->
-<!--<p>Nissan2<a th:href="@{/reserved?id=2}">Арендовать</a></p>-->
-<!--<p>Mercedes1<a th:href="@{/reserved?id=3}">Арендовать</a></p>-->
 <table>
     <tbody>
     <tr th:if="${cars.empty}">
         <td colspan="2"> No Cars Available </td>
     </tr>
     <tr th:each="car : ${cars}">
-        <td><span th:text="${car.getMark()}"> Mark </span></td>
-        <td><span th:text="${car.getNumber()}"> Number </span></td>
+        <td><p th:text="${car.getMark()}"></p></td>
+        <td><p th:text="${car.getNumber()}"></p></td>
+        <td><a th:href = "@{'/reserved?id=' + ${car.getId()}}">Зарезервировать</a></td>
     </tr>
     </tbody>
 </table>

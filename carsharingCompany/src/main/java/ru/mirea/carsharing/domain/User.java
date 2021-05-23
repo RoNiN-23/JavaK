@@ -25,6 +25,10 @@ public class User implements UserDetails {
 
     private String phone;
 
+    private Long carId;
+    private Long orderId;
+    private int wallet;
+
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "roles")
