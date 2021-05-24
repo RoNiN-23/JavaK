@@ -53,9 +53,14 @@ public class HomeController {
         return "foradmin";
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
+
     @GetMapping("/reserve")
-    public String reserve(Model model) {
+    public String reserve(@AuthenticationPrincipal User user,Model model) {
+        if (user != null) {
+            model.addAttribute("user", user.getUsername());
+        }else {
+            model.addAttribute("user", "anonymous");
+        }
         Iterable<Car> cars = carRepo.findAllByReserved(false);
         model.addAttribute("cars", cars);
         return "reserve";
@@ -64,8 +69,11 @@ public class HomeController {
 
     @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
     @GetMapping("/reserved")
-    public String reserved(@RequestParam Long id, @AuthenticationPrincipal User user, OrderForm form) {
-        Car car = carRepo.findCarById(id);
+    public String reserved(@RequestParam String mark, @AuthenticationPrincipal User user, OrderForm form) {
+        Car car = carRepo.findFirstByMarkAndReserved(mark, false);
+        if (car == null){
+            return "/error";
+        }
         car.setReserved(true);
         user.setCarId(car.getId());
         Order order = form.toOrder(user, car);
@@ -73,7 +81,7 @@ public class HomeController {
         orderRepo.save(order);
         user.setOrderId(order.getId());
         userRepo.save(user);
-        return "reserved";
+        return "redirect:/user";
     }
 
     @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
@@ -111,4 +119,8 @@ public class HomeController {
         return "redirect:/user";
     }
 
+    @GetMapping("/error")
+    public String error(){
+        return "error";
+    }
 }

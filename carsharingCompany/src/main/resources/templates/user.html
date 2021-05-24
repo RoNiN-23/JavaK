@@ -51,9 +51,9 @@
             </div>
             <div class="extra_data">
                 <span class="info">user information</span>
-                <p th:text="'Адрес электронной почты: ' + ${user.getEmail()}"></p>
-                <p th:text="'Номер телефона: ' + ${user.getPhone()}"></p>
-                <p th:text="'Баланс: ' + ${user.getWallet()} + ' руб.'"></p>
+                <p th:text="'Email: ' + ${user.getEmail()}"></p>
+                <p th:text="'Phone number: ' + ${user.getPhone()}"></p>
+                <p th:text="'Balance: ' + ${user.getWallet()} + ' руб.'"></p>
                 <p th:if="${user.getCarId() != null}">
             <span th:text="'Текущая аренда: ' + ${car.getMark()} + ' ' +
             ${car.getNumber()} + ' '"></span>
